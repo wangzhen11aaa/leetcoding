@@ -82,7 +82,66 @@
 
 /* BFS vs DFS */
 // @lc code=start
-// 
+// class Solution {
+// public:
+//     int minimumMoves(vector<vector<int>>& grid) {
+//         int s0_x, s0_y, s1_x, s1_y;
+//         // initialization.
+//         // s1_x=s0_x=s0_y=0;
+//         // s1_y=1;
+//         int minimum_move = INT32_MAX;
+//         int size = grid.size();
+//         // clock-wise has a counter-clockwise. 
+//         bool rotate_flag = false;
+//         snakeMoves(0,0,0,1, minimum_move, 0, size, rotate_flag, grid);
+//         if(minimum_move==INT32_MAX) return -1;
+//         return minimum_move;
+//     }
+    
+//     bool snakeHorizontal(int _s0_x, int _s1_x){
+//         return _s0_x == _s1_x;
+//     }
+
+//     void snakeMoves(int _s0_x, int _s0_y, int _s1_x, int _s1_y, int& _minimum_move, int m, int n, bool _rotate_flag, vector<vector<int>>& grid){
+//         //cout << "_s0_x , _s0_y, _s1_x, _s1_y :" << _s0_x << _s0_y << _s1_x << _s1_y << endl;
+//         if(_s0_x>n-1 || _s0_y>n-1 || _s1_x>n-1 ||_s1_y>n-1) return;
+//         // Check if the snake has arrived home.
+//         if(_s0_x==n-1 && _s0_y==n-2 && _s1_x==n-1 && _s1_y==n-1){
+//             if(m<_minimum_move) _minimum_move = m;
+//         }
+//         else{
+//             // Snake Horizontal position
+//             if(snakeHorizontal(_s0_x, _s1_x)){
+//                 // check if move right
+//                 if(_s1_y+1<=n-1 && !grid[_s1_x][_s1_y+1]){
+//                     snakeMoves(_s0_x, _s0_y+1, _s1_x, _s1_y+1, _minimum_move, m+1, n, false ,grid);
+//                 }
+//                 // check if clockwise rotation or slide.
+//                 if(_s0_x+1<=n-1 && !grid[_s0_x+1][_s0_y] && !grid[_s0_x+1][_s1_y]){
+//                     if(!_rotate_flag)
+//                         // clockwise rotation
+//                         snakeMoves(_s0_x, _s0_y, _s1_x+1, _s1_y-1, _minimum_move, m+1 ,n ,true, grid);
+//                     // slide
+//                     snakeMoves(_s0_x+1, _s0_y, _s1_x+1, _s1_y, _minimum_move,m+1,n, false,grid);
+//                 }
+//             }else{
+//                 // check if move down
+//                 if(_s1_x+1<=n-1 && !grid[_s1_x+1][_s1_y]){
+//                     snakeMoves(_s0_x+1, _s0_y, _s1_x+1, _s1_y, _minimum_move, m+1, n, false, grid);
+//                 }
+//                 // check if counter-clockwise rotation or slide.
+//                 if(_s0_y+1<=n-1&& !grid[_s0_x][_s0_y+1] && !grid[_s1_x][_s1_y+1]){
+//                     if(!_rotate_flag)
+//                         // couter-clockwise rotation
+//                         snakeMoves(_s0_x, _s0_y, _s1_x-1, _s1_y+1, _minimum_move, m+1, n ,true, grid);
+//                     // slide
+//                     snakeMoves(_s0_x, _s0_y+1, _s1_x, _s1_y+1, _minimum_move, m+1, n, false, grid);
+//                 }
+//             }
+//         }
+//     }
+
+// };
 class Solution {
 public:
     set<vector<int>> visited;
