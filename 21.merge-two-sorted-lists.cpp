@@ -37,31 +37,64 @@ public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         if(!l1) return l2;
         if(!l2) return l1;
-        ListNode *r_head = (l1->val <= l2->val)?l1:l2;
+        if(l1->val <= l2->val){
+             l1->next = mergeTwoLists(l1->next, l2);
+             return l1;
+        }else{
+             l2->next = mergeTwoLists(l1, l2->next);
+             return l2;
+        }
+        // ListNode *insert_list_p = (r_head == l1)?l1:l2;
+        // ListNode *pre_insert_list_p = NULL;
+        // ListNode *select_list_p = (r_head == l1)?l2:l1;
 
-        ListNode *insert_list_p = (r_head == l1)?l1:l2;
-        ListNode *pre_insert_list_p = NULL;
-        ListNode *select_list_p = (r_head == l1)?l2:l1;
-        // Insert the 
-        while(insert_list_p && select_list_p){
-            if(insert_list_p->val <= select_list_p->val) 
-            {
-                pre_insert_list_p = insert_list_p;
-                insert_list_p = insert_list_p->next;
-            }
-            else
-            {
-                ListNode * tmp_node_p = select_list_p;
-                select_list_p = select_list_p->next;
-                tmp_node_p->next=insert_list_p;
-                pre_insert_list_p->next=tmp_node_p;
-                pre_insert_list_p = tmp_node_p;
-            }
-        }
-        if(select_list_p){
-            pre_insert_list_p->next = select_list_p;
-        }
-        return r_head;
+        /*code block*/
+//      ListNode *r_head = (l1->val <= l2->val)?l1:l2;
+
+        // ListNode* tmp=nullptr;
+        // ListNode* ret_list_connector=nullptr;
+        // while(l1 && l2){
+        //     if(l1->val <= l2->val) 
+        //     {   
+        //         tmp = l1->next; 
+        //         if(tmp!=nullptr){
+        //             if(tmp->val > l2->val){
+        //                 l1->next = l2;
+        //                 ret_list_connector=l2;
+        //             }else{
+        //                 ret_list_connector=l1;
+        //             }
+        //         }else{
+        //             ret_list_connector=l1;
+        //         }
+        //         l1=tmp;
+        //     }
+        //     else
+        //     {
+        //         tmp=l2->next;
+        //         if(tmp!=nullptr){
+        //             if(tmp->val >= l1->val){
+        //                 l2->next=l1;
+        //                 ret_list_connector=l1;
+        //             }else{
+        //                 ret_list_connector=l2;
+        //             }
+        //         }else{
+        //             ret_list_connector=l2;
+        //         }
+        //         l2=tmp;
+        //     }
+ 
+        // }
+        // if(l1!=nullptr){
+        //         ret_list_connector->next=l1;
+        //  }else{
+        //         ret_list_connector->next=l2;
+        // }
+        /* code block A */
+
+
+        //return r_head;
     }
     //     ListNode *l1_iter_node_p, *l2_iter_node_p, *ret_header;
     //     l1_iter_node_p = l1;

@@ -85,7 +85,6 @@ public:
         while(aggressive_explorer && aggressive_explorer->next){
             aggressive_explorer = aggressive_explorer->next->next;
             if(normal_explorer == aggressive_explorer) return true;
-
             normal_explorer = normal_explorer->next;
         }
         return false;
