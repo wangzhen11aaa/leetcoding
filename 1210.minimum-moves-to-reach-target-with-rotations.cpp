@@ -80,8 +80,8 @@
  * 
  */
 
-/* BFS vs DFS */
 // @lc code=start
+<<<<<<< HEAD
 // class Solution {
 // public:
 //     int minimumMoves(vector<vector<int>>& grid) {
@@ -142,50 +142,12 @@
 //     }
 
 // };
+=======
+>>>>>>> parent of 73f5fd5... 1210 two bfs vs dfs in minimum path problem
 class Solution {
 public:
-    set<vector<int>> visited;
-    queue<vector<int>> q;
-    void commonMoves(vector<vector<int>>& grid,vector<int> &pos)
-    {
-        if(pos[3]+1<grid.size()&&!grid[pos[2]][pos[3]+1]&&!grid[pos[0]][pos[1]+1]&&!visited.count({pos[0],pos[1]+1,pos[2],pos[3]+1}))     //Move right
-            visited.insert({pos[0],pos[1]+1,pos[2],pos[3]+1}),q.push({pos[0],pos[1]+1,pos[2],pos[3]+1});
-        if(pos[2]+1<grid.size()&&!grid[pos[2]+1][pos[3]]&&!grid[pos[0]+1][pos[1]]&&!visited.count({pos[0]+1,pos[1],pos[2]+1,pos[3]}))       //Move down
-            visited.insert({pos[0]+1,pos[1],pos[2]+1,pos[3]}),q.push({pos[0]+1,pos[1],pos[2]+1,pos[3]});
-    }
-    void horizontal(vector<vector<int>>& grid,vector<int> &pos)
-    {
-        if(pos[0]+1<grid.size()&&!grid[pos[0]+1][pos[1]]&&!grid[pos[2]+1][pos[3]]&&!visited.count({pos[0],pos[1],pos[0]+1,pos[1]}))         //Rotate clockwise
-            visited.insert({pos[0],pos[1],pos[0]+1,pos[1]}),q.push({pos[0],pos[1],pos[0]+1,pos[1]});
-    }
-    void vertical(vector<vector<int>>& grid,vector<int> &pos)
-    {
-        if(pos[1]+1<grid.size()&&!grid[pos[0]][pos[1]+1]&&!grid[pos[2]][pos[3]+1]&&!visited.count({pos[0],pos[1],pos[0],pos[1]+1}))      //Rotate counter-clockwise
-            visited.insert({pos[0],pos[1],pos[0],pos[1]+1}),q.push({pos[0],pos[1],pos[0],pos[1]+1});
-    }
-    int minimumMoves(vector<vector<int>>& grid) 
-    {
-        vector<int> target={grid.size()-1,grid.size()-2,grid.size()-1,grid.size()-1}; 
-        q.push({0,0,0,1});
-        visited.insert({0,0,0,1});
-        int size,moves=0;
-        while(!q.empty())
-        {
-            size=q.size();
-            while(size--)
-            {
-                if(q.front()==target)                             //Reached target
-                    return moves;
-                if(q.front()[0]==q.front()[2])                 //When snake is horizontal
-                    horizontal(grid,q.front());
-                else                                                   //When snake is vertical
-                    vertical(grid,q.front());
-		commonMoves(grid,q.front());                 //Common moves (Right and down)
-                q.pop();
-            }
-            moves++;
-        }
-        return -1;
+    int minimumMoves(vector<vector<int>>& grid) {
+        
     }
 };
 // @lc code=end
