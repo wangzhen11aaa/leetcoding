@@ -62,41 +62,41 @@ class Solution {
 public:
     //change the code into dynamic program.
     int maxProfit(vector<int>& prices) {
-    //     int length = prices.size();
-    //     if(length <= 1) return 0;
-    //     int best_buy_price = prices[0];
-    //     int _max_profit = 0;
-    //     int max_profit = 0;
-    //     // last item in prices is useless.
-    //     for(int i = 1; i < length - 1 ; i++){
-    //         // It is the day to buy stock.
-    //         if (best_buy_price > prices[i])
-    //         {
-    //             best_buy_price = prices[i];
-    //         }
-    //         else // It may be the day to sell.
-    //         {
-    //             if (prices[i] > prices[i + 1])
-    //             {
-    //                 max_profit += (prices[i] - best_buy_price);
-    //                 _max_profit = 0;
-    //                 best_buy_price = prices[i+1];
-    //             }
-    //         }
-    //     }
-    //     if(prices[length - 1] >= prices[length -2]) {
-    //         max_profit += prices[length -1] - best_buy_price;
-    //     }
-    //     return max_profit;
-        int states[2][2] = {INT_MIN, 0}; // 0: buy stock, 1: sell stock
-        
-        int len = prices.size(), cur=0, next = 1;
-        for(int i = 0; i < len; i++){
-            states[next][0] = max(states[cur][0], -prices[i]);
-            states[next][1] = max(states[cur][1], states[cur][0]+prices[i]);
-            swap(cur, next);
+        int length = prices.size();
+        if(length <= 1) return 0;
+        int best_buy_price = prices[0];
+        int _max_profit = 0;
+        int max_profit = 0;
+        // last item in prices is useless.
+        for(int i = 1; i < length - 1 ; i++){
+            // It is the day to buy stock.
+            if (best_buy_price > prices[i])
+            {
+                best_buy_price = prices[i];
+            }
+            else // It may be the day to sell.
+            {
+                if (prices[i] > prices[i + 1])
+                {
+                    max_profit += (prices[i] - best_buy_price);
+                    _max_profit = 0;
+                    best_buy_price = prices[i+1];
+                }
+            }
         }
-        return states[cur][1];
+        if(prices[length - 1] >= prices[length -2]) {
+            max_profit += prices[length -1] - best_buy_price;
+        }
+        return max_profit;
+        // int states[2][2] = {INT_MIN, 0}; // 0: buy stock, 1: sell stock
+        
+        // int len = prices.size(), cur=0, next = 1;
+        // for(int i = 0; i < len; i++){
+        //     states[next][0] = max(states[cur][0], -prices[i]);
+        //     states[next][1] = max(states[cur][1], states[cur][0]+prices[i]);
+        //     swap(cur, next);
+        // }
+        // return states[cur][1];
     } 
 };
 // @lc code=end
