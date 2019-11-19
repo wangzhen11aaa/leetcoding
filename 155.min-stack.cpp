@@ -44,50 +44,87 @@
  */
 
 // @lc code=start
+// class MinStack {
+// public:
+//     /** initialize your data structure here. */
+//     MinStack() {
+           
+//     }
+
+//     void push(int x) {
+//         stack_size++;
+//         datas.push_back(x);
+//         if(minimum > x) minimum = x;
+//     }
+    
+//     // Guarantee the minimum value is right after poping.
+//     void pop() {
+//         if(stack_size==0) return;
+//         // compare the last element in vector with the current minimum.
+//         auto last_elment = datas.back();
+//         datas.pop_back();
+//         stack_size--;
+//         // Update the minimum.
+//         if(last_elment>minimum){
+//             return;
+//         }
+//         else{
+//             minimum = INT_MAX;
+//             for(auto data : datas){
+//                 if(minimum > data)
+//                 {
+//                     minimum = data;
+//                 }
+//             }
+//         }
+//     }
+    
+//     int top() {
+//         if(stack_size >= 1){
+//             return datas.back();
+//         }else{
+//             return INT_MIN;
+//         }
+//     }
+    
+//     int getMin() {
+//         return minimum;
+//     }
+// private:
+//     int stack_size = 0;
+//  // Initialize value.
+//     int minimum = INT_MAX;
+//     vector<int> datas;
+// };
 class MinStack {
 public:
-    /** initialize your data structure here. */
+    vector<int> a;
+    vector<int> min;
     MinStack() {
-           
+        min.push_back(2147483647);
     }
-
     void push(int x) {
-        stack_size++;
-        datas.push_back(x);
-        if(minimum > x) minimum = x;
-    }
-    
-    // Guarantee the minimum value is right after poping.
-    void pop() {
-        stack_size--;
-        datas.pop_back();
-        minimum = INT_MAX;
-        for(auto data : datas){
-            if(minimum > data)
-            {
-                minimum = data;
-            }
+        a.push_back(x);
+        if (x < min.back()) {
+            min.push_back(x);
+        } else {
+            min.push_back(min.back());
         }
     }
-    
-    int top() {
-        if(stack_size >= 1){
-            return datas.back();
-        }else{
-            return INT_MIN;
-        }
-    }
-    
-    int getMin() {
-        return minimum;
-    }
-private:
-    int stack_size = 0;
- // Initialize value.
-    int minimum = INT_MAX;
-    vector<int> datas;
-};
 
+    void pop() {
+        a.pop_back();
+        min.pop_back();
+    }
+
+    int top() {
+        return a.back();
+    }
+
+    int getMin() {
+        return min.back();
+    }
+};
 /**
  * Your MinStack object will be instantiated and called as such:
  * MinStack* obj = new MinStack();
